@@ -12,6 +12,9 @@ int main()
     
     dest = squeeze(source);
 
-    printf("%s\n", dest);
+    if(dest != NULL)
+      printf("%s\n", dest);
+    else
+      printf("Empty input\n");
     return 0;
 }
