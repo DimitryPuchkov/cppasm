@@ -4,7 +4,7 @@ extern lstrlenA@4:near
 
 .data 
 buf1 dd ?
-buf2 dd ?
+buf2 db 200 dup (?)
 len dd ?
 
 .code
@@ -15,8 +15,7 @@ mov ebp, esp; define local ebp
 ; get args
 mov eax, [ebp]+8; source to eax
 mov buf1, eax; source to buf1
-mov eax, [ebp]+12; dest to eax
-mov buf2, eax
+
 
 ;proc body
 ;get source len
@@ -34,7 +33,7 @@ mov esi, buf1
 add esi, len
 sub esi, 1
 ; edi - pointer to end of result str
-mov edi, buf2
+mov edi, offset buf2
 add edi, len
 sub edi, 1
 
@@ -50,7 +49,7 @@ continue:
 loop strmove
 
 add edi, 1; edi - pointer to start result str
-mov buf2, edi ; result str pointer to buf2
+mov eax, edi ; result str pointer to eax that will be return value
 
 jmp exit
 
